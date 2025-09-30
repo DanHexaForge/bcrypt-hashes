@@ -5,6 +5,7 @@ const helmet = require("helmet");
 app.use(helmet.hidePoweredBy()); // Hide the X-Powered-By header
 
 app.use(helmet.frameguard({ action: "DENY" })); // Prevent clickjacking
+app.use(helmet.xssFilter()); // Prevent XSS attacks
 
 module.exports = app;
 const api = require("./server.js");
