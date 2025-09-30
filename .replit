@@ -36,3 +36,7 @@ externalPort = 80
 [[ports]]
 localPort = 38829
 externalPort = 3000
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["bash", "-c", "cd boilerplate-infosec && npm start"]
