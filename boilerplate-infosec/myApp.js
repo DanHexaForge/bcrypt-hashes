@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const helmet = require("helmet");
 
-app.use(helmet.hidePoweredBy());
+app.use(helmet.hidePoweredBy()); // Hide the X-Powered-By header
 
-app.use(helmet.frameguard({ action: "DENY" }));
+app.use(helmet.frameguard({ action: "DENY" })); // Prevent clickjacking
 
 module.exports = app;
 const api = require("./server.js");
