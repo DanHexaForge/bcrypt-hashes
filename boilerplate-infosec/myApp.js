@@ -1,51 +1,12 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+const helmet = require("helmet");
 
+app.use(helmet.hidePoweredBy());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.get("/", (req, res) => {
+  res.send("Sorry another day 🚀");
+});
 
 module.exports = app;
 const api = require('./server.js');
