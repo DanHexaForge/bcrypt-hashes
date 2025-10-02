@@ -6,7 +6,25 @@ app.use(helmet.hidePoweredBy()); // Hide the X-Powered-By header
 
 app.use(helmet.frameguard({ action: "DENY" })); // Prevent clickjacking
 app.use(helmet.xssFilter()); // Prevent XSS attacks
-
+app.use(helmet.noSniff()); // Prevent MIME type sniffing
+app.use(helmet.ieNoOpen()); // Prevent Internet Explorer from opening files in the browser
+ninetyDaysInSeconds = 90 * 24 * 60 * 60;
+app.use(
+  helmet.hsts({
+    maxAge: ninetyDaysInSeconds,
+    force: true,
+  }),
+); // Enable HTTP Strict Transport Security (HSTS)
+app.use(helmet.dnsPrefetchControl()); // Prevent DNS prefetching
+app.use(helmet.noCache()); // Prevent caching
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'trusted-cdn.com'"],
+    },
+  }),
+);
 module.exports = app;
 const api = require("./server.js");
 app.use(express.static("public"));
