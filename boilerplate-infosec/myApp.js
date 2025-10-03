@@ -25,6 +25,22 @@ app.use(
     },
   }),
 );
+app.use(
+  helmet({
+    frameguard: {
+      // configure
+      action: "deny",
+    },
+    contentSecurityPolicy: {
+      // enable and configure
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["style.com"],
+      },
+    },
+    dnsPrefetchControl: false, // disable
+  }),
+);
 module.exports = app;
 const api = require("./server.js");
 app.use(express.static("public"));
